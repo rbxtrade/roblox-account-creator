@@ -35,13 +35,17 @@ end
 function loopThis()
     println("Thread started")
     while true
-        cookie = createAccount()
-        write(results, string(cookie, "\n"))
-        global count = count + 1
+        try
+            cookie = createAccount()
+            write(results, string(cookie, "\n"))
+            global count = count + 1
+        catch
+            continue
+        end
     end
 end
 
-for _ in 1:46
+for _ in 1:10
     @async loopThis()
 end
 
